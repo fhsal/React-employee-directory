@@ -18,6 +18,7 @@ class Directory extends Component {
     eeFiltered: [],
     search: "",
     isFiltered: false,
+    sortOrder: 1,
   };
 
   componentDidMount() {
@@ -53,15 +54,21 @@ class Directory extends Component {
     });
   };
 
+
 sortEmployees = event => {
+  let a1 = this.state.sortOrder;
+  let a2 = a1*-1;
+
   let sortedEmployees = this.state.employees;
-    sortedEmployees = sortedEmployees.sort((a, b) => (a.name.first > b.name.first) ? 1: -1);
+    sortedEmployees = sortedEmployees.sort((a, b) => (a.name.first > b.name.first) ? a2: a1);
+
   let sortedeeFiltered = this.state.eeFiltered;
-    sortedeeFiltered  = sortedeeFiltered.sort((a, b) => (a.name.first > b.name.first) ? 1: -1);
+    sortedeeFiltered  = sortedeeFiltered.sort((a, b) => (a.name.first > b.name.first) ? a1: a2);
 
   this.setState({
     employees: sortedEmployees,
-    eeFiltered: sortedeeFiltered
+    eeFiltered: sortedeeFiltered,
+    sortOrder: a2
   })
 }
 
@@ -115,7 +122,6 @@ sortEmployees = event => {
                       dob={employee.dob.date}
                     />
                   ))}
-              ;
             </tbody>
           </table>
         </div>
