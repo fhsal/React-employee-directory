@@ -31,7 +31,6 @@ class Directory extends Component {
     });
   }
 
-
   // filter employees based on search term
   // check if there is a match and set that to eeFiltered for rendering
   filterEmp = () => {
@@ -56,12 +55,13 @@ class Directory extends Component {
 
 
 sortEmployees = event => {
+
+  
   let a1 = this.state.sortOrder;
   let a2 = a1*-1;
 
   let sortedEmployees = this.state.employees;
     sortedEmployees = sortedEmployees.sort((a, b) => (a.name.first > b.name.first) ? a2: a1);
-
   let sortedeeFiltered = this.state.eeFiltered;
     sortedeeFiltered  = sortedeeFiltered.sort((a, b) => (a.name.first > b.name.first) ? a1: a2);
 
@@ -88,7 +88,12 @@ sortEmployees = event => {
             <thead className="thead">
               <tr>
                 <th>Photo </th>
-                <th onClick={(event) =>this.sortEmployees(event)}>Name</th>
+                <th onClick={(event) =>this.sortEmployees(event)}>Name  
+                <button className="navbar-toggler" type="button" >sort
+       
+      </button>
+                
+                </th>
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Birthdate </th>
