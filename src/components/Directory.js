@@ -15,7 +15,7 @@ class Directory extends Component {
 
   state = {
     employees: [],
-    eeFilterd: [],
+    eeFiltered: [],
     search: "",
     isFiltered: false,
   };
@@ -26,6 +26,7 @@ class Directory extends Component {
         employees: results.data.results,
         eeFiltered: results.data.results,
       });
+      // console.log(eeFilterd)
     });
   }
 
@@ -55,7 +56,7 @@ class Directory extends Component {
 sortEmployees = event => {
   let sortedEmployees = this.state.employees;
     sortedEmployees = sortedEmployees.sort((a, b) => (a.name.first > b.name.first) ? 1: -1);
-  let sortedeeFiltered = this.state.eeFilterd;
+  let sortedeeFiltered = this.state.eeFiltered;
     sortedeeFiltered  = sortedeeFiltered.sort((a, b) => (a.name.first > b.name.first) ? 1: -1);
 
   this.setState({
