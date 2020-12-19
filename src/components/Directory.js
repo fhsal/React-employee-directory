@@ -17,7 +17,7 @@ class Directory extends Component {
     employees: [],
     eeFilterd: [],
     search: "",
-    sorted: false,
+    isFiltered: false,
   };
 
   componentDidMount() {
@@ -48,7 +48,7 @@ class Directory extends Component {
   startFilter = event => {
     this.setState({ search: event.target.value }, () => {
       this.filterEmp();
-      this.setState({ sorted: true });
+      this.setState({ isFiltered: true });
     });
   };
 
@@ -78,7 +78,7 @@ class Directory extends Component {
 
             <tbody>
               {/* if it's not filtered, map entire api response */}
-              {!this.state.sorted
+              {!this.state.isFiltered
                 ? this.state.employees.map((employee) => (
                     <Employees
                       key={employee.id.value}
