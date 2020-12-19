@@ -24,7 +24,7 @@ class Directory extends Component {
     API.getEmployees().then(results => {
       this.setState({
         employees: results.data.results,
-        eeFiltered: results.data.results
+        eeFiltered: results.data.results,
       });
     });
   }
@@ -52,6 +52,18 @@ class Directory extends Component {
     });
   };
 
+sortEmployees = event => {
+  let sortedEmployees = this.state.employees;
+    sortedEmployees = sortedEmployees.sort((a, b) => (a.name.first > b.name.first) ? 1: -1);
+  let sortedeeFiltered = this.state.eeFilterd;
+    sortedeeFiltered  = sortedeeFiltered.sort((a, b) => (a.name.first > b.name.first) ? 1: -1);
+
+  this.setState({
+    employees: sortedEmployees,
+    eeFiltered: sortedeeFiltered
+  })
+}
+
   render = () => {
     return (
       <div>
@@ -68,7 +80,7 @@ class Directory extends Component {
             <thead className="thead">
               <tr>
                 <th>Photo </th>
-                <th>Name</th>
+                <th onClick={(event) =>this.sortEmployees(event)}>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Birthdate </th>
