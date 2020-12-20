@@ -5,7 +5,6 @@ import API from "../utils/API";
 // import Filter from "./Filter.js";
 import "../styles/Directory.css";
 
-
 class Directory extends Component {
 
   state = {
@@ -22,7 +21,6 @@ class Directory extends Component {
         employees: results.data.results,
         eeFiltered: results.data.results,
       });
-      // console.log(eeFilterd)
     });
   }
 
@@ -63,15 +61,19 @@ sortEmployees = event => {
   })
 }
 
+// render header and then table 
+
   render = () => {
     return (
       <div>
         <div className="jumbotron">
         <br></br>
           <h3 className="display-4">Employee Directory</h3>
-
           <br></br><br></br>
-          <Search name="search" startFilter={this.startFilter} label="Search" />
+
+{/* Search component which initiaties filter function  */}
+
+      <Search name="search" startFilter={this.startFilter} label="Search" />
         </div>
         <br></br><br></br><br></br><br></br>
         <div className="container">
@@ -90,11 +92,11 @@ sortEmployees = event => {
             <br></br> 
 
             <tbody>
-              {/* if it's not filtered, map entire api response */}
+  {/* if it's not filtered, map entire api response using Employee component*/}
+  
               {!this.state.isFiltered
                 ? this.state.employees.map((employee) => (
                     <Employees
-                      // key={employee.id.value}
                       firstName={employee.name.first}
                       lastName={employee.name.last}
                       phone={employee.phone}
@@ -106,7 +108,6 @@ sortEmployees = event => {
                 : // otherwise map the filtered employees
                   this.state.eeFiltered.map((employee) => (
                     <Employees
-                      // key={employee.id.value}
                       firstName={employee.name.first}
                       lastName={employee.name.last}
                       phone={employee.phone}
