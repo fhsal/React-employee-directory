@@ -6,9 +6,9 @@ This assignment involved updating a provided budget application to be a progress
 
 The MVC needed to be modified in several areas to include service-worker, manifest and caching so that the app functions in either a connected or disconnected mode and can store transactions locally when disconnected, which are then synched-up with an 'online' database once a user reconnects to the app deployed on Heroku.
 
-The application is fully functional online and offline and is deployed on Heroku at this link: https://budget-trakker.herokuapp.com/. Here is a screen shot of the working application:
+The application is fully functional online and offline and is deployed on Heroku at this link: https://ee-dir.herokuapp.com/. Here is a screen shot of the working application:
 
-![img](https://github.com/fhsal/hw18-PWA/blob/main/budget-tracker-screenshot.jpg)
+![img](https://github.com/fhsal/hw19-employee-directory/blob/main/Employee%20Directory%20app%20screen%20shot.jpg)
 
 Several components had to be modified to enable the app to run on Heroku and function as an online/offline PWA, they are:
 
