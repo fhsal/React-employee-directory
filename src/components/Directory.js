@@ -7,11 +7,6 @@ import "../styles/Directory.css";
 
 
 class Directory extends Component {
-  // check that the component rendered at least once, and make API call
-  // wait for the information to come back
-  // componentDidMount() {
-  //   this.getEmployees();
-  // };
 
   state = {
     employees: [],
@@ -53,18 +48,14 @@ class Directory extends Component {
     });
   };
 
-
 sortEmployees = event => {
-
-  
+// set sortOrder to determine if sort should be decending or acending 
   let a1 = this.state.sortOrder;
   let a2 = a1*-1;
-
-  let sortedEmployees = this.state.employees;
-    sortedEmployees = sortedEmployees.sort((a, b) => (a.name.first > b.name.first) ? a2: a1);
-  let sortedeeFiltered = this.state.eeFiltered;
-    sortedeeFiltered  = sortedeeFiltered.sort((a, b) => (a.name.first > b.name.first) ? a1: a2);
-
+// sort objects based upon above criteria
+  let  sortedEmployees = this.state.employees.sort((a, b) => (a.name.first > b.name.first) ? a2: a1);
+  let  sortedeeFiltered  = this.state.eeFiltered.sort((a, b) => (a.name.first > b.name.first) ? a1: a2);
+// update objects with new sort ordering 
   this.setState({
     employees: sortedEmployees,
     eeFiltered: sortedeeFiltered,
@@ -88,11 +79,8 @@ sortEmployees = event => {
             <thead className="thead">
               <tr>
                 <th>Photo </th>
-                <th onClick={(event) =>this.sortEmployees(event)}>Name  
-                <button className="navbar-toggler" type="button" >sort
-       
-      </button>
-                
+                <th onClick={(event) =>this.sortEmployees(event)}>Name 
+                  <button className="navbar-toggler" type="button" >sort</button>
                 </th>
                 <th>Email</th>
                 <th>Phone</th>
@@ -106,7 +94,7 @@ sortEmployees = event => {
               {!this.state.isFiltered
                 ? this.state.employees.map((employee) => (
                     <Employees
-                      key={employee.id.value}
+                      // key={employee.id.value}
                       firstName={employee.name.first}
                       lastName={employee.name.last}
                       phone={employee.phone}
@@ -118,7 +106,7 @@ sortEmployees = event => {
                 : // otherwise map the filtered employees
                   this.state.eeFiltered.map((employee) => (
                     <Employees
-                      key={employee.id.value}
+                      // key={employee.id.value}
                       firstName={employee.name.first}
                       lastName={employee.name.last}
                       phone={employee.phone}
