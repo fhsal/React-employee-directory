@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# hw18-PWA - Budget Tracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Summary
 
-## Available Scripts
+This assignment involved updating a provided budget application to be a progressive web app (PWA).
 
-In the project directory, you can run:
+The MVC needed to be modified in several areas to include service-worker, manifest and caching so that the app functions in either a connected or disconnected mode and can store transactions locally when disconnected, which are then synched-up with an 'online' database once a user reconnects to the app deployed on Heroku.
 
-### `npm start`
+The application is fully functional online and offline and is deployed on Heroku at this link: https://budget-trakker.herokuapp.com/. Here is a screen shot of the working application:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![img](https://github.com/fhsal/hw18-PWA/blob/main/budget-tracker-screenshot.jpg)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Several components had to be modified to enable the app to run on Heroku and function as an online/offline PWA, they are:
 
-### `npm test`
+(1) index.html needed to be updated to include a serviceWorker listener which is registered when the window load event occurs. Scripts to link the offline database via db3.js and manifest were also incorporated.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+(2) manifest.webmanifest was created and includes two icons that were provided, although the icons don't appear to be used within the app.
 
-### `npm run build`
+(3) service-worker.js was created and includes static files to cache and eventListener(s) to install, activate, fetch and respond with cached data.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+(4) db3.js was created to store transactions in a 'budget' database to be kept in indexDB when the app is operating offline; it is triggered by an event listener which checks if the navigator is online/offline. Once back online it reads all transactions from 'budget' in indexDB, posts the transactions and clears the local database.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+(5) server.js was modified to use either a local or environment PORT so that the app could run on Heroku; an environment connection for Mongo was also added so that the database connection could similarly be used from Heroku.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## User Story
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+AS AN avid traveller
+I WANT to be able to track my withdrawals and deposits with or without a data/internet connection
+SO THAT my account balance is accurate when I am traveling
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Business Context
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Giving users a fast and easy way to track their money is important, but allowing them to access that information anytime is even more important. Having offline functionality is paramount to our applications success.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Acceptance Criteria
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+GIVEN a user is on Budget App without an internet connection
+WHEN the user inputs a withdrawal or deposit
+THEN that will be shown on the page, and added to their transaction history when their connection is back online.
