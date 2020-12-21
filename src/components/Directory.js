@@ -35,6 +35,7 @@ class Directory extends Component {
         filtered.email.toLowerCase().includes(search.toLowerCase())
       )
     })
+    console.log(eeFiltered)
     this.setState({ eeFiltered })
   }
 
@@ -54,6 +55,8 @@ sortEmployees = event => {
   let  sortedEmployees = this.state.employees.sort((a, b) => (a.name.first > b.name.first) ? a2: a1);
   let  sortedeeFiltered  = this.state.eeFiltered.sort((a, b) => (a.name.first > b.name.first) ? a1: a2);
 // update objects with new sort ordering 
+console.log(sortedeeFiltered)
+
   this.setState({
     employees: sortedEmployees,
     eeFiltered: sortedeeFiltered,
@@ -74,6 +77,7 @@ sortEmployees = event => {
 {/* Search component which initiaties filter function  */}
 
       <Search name="search" startFilter={this.startFilter} label="Search" />
+      
         </div>
         <br></br><br></br><br></br><br></br>
         <div className="container">
@@ -92,21 +96,8 @@ sortEmployees = event => {
             <br></br> 
 
             <tbody>
-  {/* if it's not filtered, map entire api response using Employee component*/}
-  
-              {!this.state.isFiltered
-                ? this.state.employees.map((employee) => (
-                    <Employees
-                      firstName={employee.name.first}
-                      lastName={employee.name.last}
-                      phone={employee.phone}
-                      email={employee.email}
-                      icon={employee.picture.thumbnail}
-                      dob={employee.dob.date}
-                    />
-                  ))
-                : // otherwise map the filtered employees
-                  this.state.eeFiltered.map((employee) => (
+  {/* render employee information based upon filter criteria */}
+                  {this.state.eeFiltered.map((employee) => (
                     <Employees
                       firstName={employee.name.first}
                       lastName={employee.name.last}
