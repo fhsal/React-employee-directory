@@ -41,15 +41,20 @@ class Directory extends Component {
   };
 
   sortEmployees = event => {
+
 // set sortOrder to determine if sort should be decending or acending, changes sign and direction each time invoked
-    let a1 = this.state.sortOrder;
+   
+let a1 = this.state.sortOrder;
     let a2 = a1*-1;
+
 // sort objects based upon above criteria
+
     let  sortedEmployees = this.state.employees.sort((a, b) => (a.name.first > b.name.first) ? a2: a1);
     let  sortedeeFiltered  = this.state.eeFiltered.sort((a, b) => (a.name.first > b.name.first) ? a1: a2);
     console.log(sortedeeFiltered)
 
 // update objects with new sort ordering 
+
     this.setState({
       employees: sortedEmployees,
       eeFiltered: sortedeeFiltered,
@@ -69,7 +74,7 @@ class Directory extends Component {
 
 {/* Search component which initiaties filter function  */}
 
-      <Search name="search" startFilter={this.filterEmployees} label="Search" />
+    <Search name="search" startFilter={this.filterEmployees} label="Search" />
       
 {/* render table header - with event listener on employee name */}
 
