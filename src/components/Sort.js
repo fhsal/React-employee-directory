@@ -1,9 +1,13 @@
 import React from "react";
 import "../styles/Employees.css";
 
-const Filter = (props) => {
+const Sort = (props) => {
 
-  
+
+
+
+
+
 
   return (
     <tr className="tr">
@@ -17,6 +21,6 @@ const Filter = (props) => {
   );
 };
 
-export default Filter;
+export default Sort;
 
 

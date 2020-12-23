@@ -25,44 +25,37 @@ class Directory extends Component {
   }
 
   // filter employees based on search term
-  // check if there is a match and set that to eeFiltered for rendering
-  filterEmp = () => {
-    let { employees, search } = this.state;
-    let eeFiltered = employees.filter(filtered => {
-      return (
-        filtered.name.first.toLowerCase().includes(search.toLowerCase()) ||
-        filtered.name.last.toLowerCase().includes(search.toLowerCase()) ||
-        filtered.email.toLowerCase().includes(search.toLowerCase())
-      )
-    })
-    console.log(eeFiltered)
-    this.setState({ eeFiltered })
-  }
-
-  // grab search term, activate filterd  
+ 
   startFilter = event => {
     this.setState({ search: event.target.value }, () => {
-      this.filterEmp();
-      this.setState({ isFiltered: true });
+      let { employees, search } = this.state;
+      let eeFiltered = employees.filter(filtered => {
+        return (
+          filtered.name.first.toLowerCase().includes(search.toLowerCase()) ||
+          filtered.name.last.toLowerCase().includes(search.toLowerCase())  
+        )
+      })
+      console.log(eeFiltered)
+      this.setState({ eeFiltered })
     });
   };
-
-sortEmployees = event => {
+  
+  sortEmployees = event => {
 // set sortOrder to determine if sort should be decending or acending 
-  let a1 = this.state.sortOrder;
-  let a2 = a1*-1;
+    let a1 = this.state.sortOrder;
+    let a2 = a1*-1;
 // sort objects based upon above criteria
-  let  sortedEmployees = this.state.employees.sort((a, b) => (a.name.first > b.name.first) ? a2: a1);
-  let  sortedeeFiltered  = this.state.eeFiltered.sort((a, b) => (a.name.first > b.name.first) ? a1: a2);
+    let  sortedEmployees = this.state.employees.sort((a, b) => (a.name.first > b.name.first) ? a2: a1);
+    let  sortedeeFiltered  = this.state.eeFiltered.sort((a, b) => (a.name.first > b.name.first) ? a1: a2);
 // update objects with new sort ordering 
-console.log(sortedeeFiltered)
+    console.log(sortedeeFiltered)
 
-  this.setState({
-    employees: sortedEmployees,
-    eeFiltered: sortedeeFiltered,
-    sortOrder: a2
-  })
-}
+    this.setState({
+      employees: sortedEmployees,
+      eeFiltered: sortedeeFiltered,
+      sortOrder: a2
+    })
+  }
 
 // render header and then table 
 
