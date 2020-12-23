@@ -26,30 +26,30 @@ class Directory extends Component {
 
   // filter employees based on search term
  
-  startFilter = event => {
+  filterEmployees = event => {
     this.setState({ search: event.target.value }, () => {
       let { employees, search } = this.state;
       let eeFiltered = employees.filter(filtered => {
         return (
           filtered.name.first.toLowerCase().includes(search.toLowerCase()) ||
           filtered.name.last.toLowerCase().includes(search.toLowerCase())  
-        )
-      })
+          )
+        })
       console.log(eeFiltered)
       this.setState({ eeFiltered })
     });
   };
-  
+
   sortEmployees = event => {
-// set sortOrder to determine if sort should be decending or acending 
+// set sortOrder to determine if sort should be decending or acending, changes sign and direction each time invoked
     let a1 = this.state.sortOrder;
     let a2 = a1*-1;
 // sort objects based upon above criteria
     let  sortedEmployees = this.state.employees.sort((a, b) => (a.name.first > b.name.first) ? a2: a1);
     let  sortedeeFiltered  = this.state.eeFiltered.sort((a, b) => (a.name.first > b.name.first) ? a1: a2);
-// update objects with new sort ordering 
     console.log(sortedeeFiltered)
 
+// update objects with new sort ordering 
     this.setState({
       employees: sortedEmployees,
       eeFiltered: sortedeeFiltered,
@@ -69,8 +69,10 @@ class Directory extends Component {
 
 {/* Search component which initiaties filter function  */}
 
-      <Search name="search" startFilter={this.startFilter} label="Search" />
+      <Search name="search" startFilter={this.filterEmployees} label="Search" />
       
+{/* render table header - with event listener on employee name */}
+
         </div>
         <br></br><br></br><br></br><br></br>
         <div className="container">
@@ -89,7 +91,9 @@ class Directory extends Component {
             <br></br> 
 
             <tbody>
-  {/* render employee information based upon filter criteria */}
+
+  {/* render employee information within table body based upon filter criteria */}
+
                   {this.state.eeFiltered.map((employee) => (
                     <Employees
                       firstName={employee.name.first}
