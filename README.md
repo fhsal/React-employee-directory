@@ -2,25 +2,21 @@
 
 ## Summary
 
-This assignment involved updating a provided budget application to be a progressive web app (PWA).
+This assignment involved using React to build an application which populates an Employee Directory from the API "random user", presenting that in a tabular format and enabling the user to search and sort the Employee Directory based upon at least one attribute - in this case, Employee Name.
 
-The MVC needed to be modified in several areas to include service-worker, manifest and caching so that the app functions in either a connected or disconnected mode and can store transactions locally when disconnected, which are then synched-up with an 'online' database once a user reconnects to the app deployed on Heroku.
-
-The application is fully functional online and offline and is deployed on Heroku at this link: https://ee-dir.herokuapp.com/. Here is a screen shot of the working application:
+The application is fully functional online and is deployed on Heroku at this link: https://ee-dir.herokuapp.com/. Here is a screen shot of the working application:
 
 ![img](https://github.com/fhsal/hw19-employee-directory/blob/main/Employee%20Directory%20app%20screen%20shot.jpg)
 
-Several components had to be modified to enable the app to run on Heroku and function as an online/offline PWA, they are:
+The application utilizes four components, they are:
 
-(1) index.html needed to be updated to include a serviceWorker listener which is registered when the window load event occurs. Scripts to link the offline database via db3.js and manifest were also incorporated.
+(1) Directory.js - this is the root for the application and contains the main functions to call the API via the API component, Search to filter the Employee Directory utilizing a Filter function and Sort to display the Employee Directory in acending or decending order based upon Employee Name.   It utilizes the API component to invoke an axios call to the random user API, the Search component to engage the listener on the page and the Employee component to which it passes the employee array for formatting.   It also renders the table header and body.  The table header also includes an event listener to trigger sorting of the Employee Directory which invokes the sortEmployees function. 
 
-(2) manifest.webmanifest was created and includes two icons that were provided, although the icons don't appear to be used within the app.
+(2) Search.js - this component handles the event listener for the seach input box where a user can enter an employee name.  It triggers a state-change which re-renders the Directory display using the on-change functionality. 
 
-(3) service-worker.js was created and includes static files to cache and eventListener(s) to install, activate, fetch and respond with cached data.
+(3) Employee.js - this component accepts the employee object as prop from Directory.js and formats the employee object by concatenating first and last name and using Moment.js to format the employee's date of birth.   The response is returned to Directory.js which is used to map data into the body of the table. 
 
-(4) db3.js was created to store transactions in a 'budget' database to be kept in indexDB when the app is operating offline; it is triggered by an event listener which checks if the navigator is online/offline. Once back online it reads all transactions from 'budget' in indexDB, posts the transactions and clears the local database.
-
-(5) server.js was modified to use either a local or environment PORT so that the app could run on Heroku; an environment connection for Mongo was also added so that the database connection could similarly be used from Heroku.
+(4) API.js - this component is within the Utils folder and is called from Directory.js.  It returns 250 employees in an object. 
 
 ---
 
