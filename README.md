@@ -4,7 +4,7 @@
 
 This assignment involved using React to build an application which populates an Employee Directory from the API "random user", presenting that in a tabular format and enabling the user to search and sort the Employee Directory based upon at least one attribute - in this case, Employee Name.
 
-The application is fully functional online and is deployed on Heroku at this link: https://ee-dir.herokuapp.com/. Here is a screen shot of the working application:
+The application is fully functional online and is deployed on GitHubpages at link: https://fhsal.github.io/ee-dir/ .   I had also previously deployed the app on Heroku, but that link occassionally takes a long time to load and can time out at link: https://ee-dir.herokuapp.com/. Here is a screen shot of the working application:
 
 ![img](https://github.com/fhsal/hw19-employee-directory/blob/main/Employee%20Directory%20app%20screen%20shot.jpg)
 
